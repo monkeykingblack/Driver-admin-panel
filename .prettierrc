@@ -5,10 +5,11 @@
   "importOrder": [
     "<TYPES>^(node:)",
     "<TYPES>",
+    "<TYPES>^[~]",
     "<TYPES>^[.]",
     "",
     "^react",
-    "^next",
+    "^next(?!-auth)\b",
     "",
     "<BUILTIN_MODULES>",
     "",
