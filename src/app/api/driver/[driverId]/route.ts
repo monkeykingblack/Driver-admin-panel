@@ -1,6 +1,5 @@
 import { Role } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import { NextApiRequest } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
 import * as v from 'valibot';
 
@@ -8,7 +7,7 @@ import { auth } from '~/consts/next-auth';
 import { UpdateDriverSchema } from '~/schemas';
 import { prisma } from '~/server/prisma';
 
-export async function GET(req: NextApiRequest, { params }: { params: Promise<{ driverId: string }> }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ driverId: string }> }) {
   const session = await auth();
 
   if (!session) {
