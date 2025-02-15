@@ -33,7 +33,7 @@ export function ensureLogin<P extends { [key: string]: unknown }>(
     const session = await auth(context);
     try {
       if (!session) {
-        throw new HttpError('Unauthorized', 404);
+        throw new HttpError('Unauthorized', 401);
       }
       axios.defaults.headers['cookie'] = context.req.headers.cookie || '';
       props['user'] = await axios<{ user: User }>('/user/me').then(({ data }) => data);
@@ -65,6 +65,7 @@ export function ensureLogin<P extends { [key: string]: unknown }>(
           return handler(context, axios);
         }
         if (e.status === 401) {
+          console.log(e);
           const redirect = encodeURIComponent(context.req?.url || '');
           const query = redirect ? `redirect=${redirect}` : '';
           return {
