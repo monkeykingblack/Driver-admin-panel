@@ -71,6 +71,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@faker-js/faker": "^9.4.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/lodash": "^4.17.15",
@@ -79,6 +80,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/sharedb": "^5.1.0",
+    "cuid": "^3.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
@@ -95,7 +97,7 @@
     "npm": "please-use-pnpm"
   },
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/index.ts"
   },
   "packageManager": "pnpm@10.2.1"
 }
