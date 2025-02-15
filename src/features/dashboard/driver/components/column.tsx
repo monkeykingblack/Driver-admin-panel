@@ -1,9 +1,8 @@
 'use client';
 
-import { Driver, DriverStatus } from '@prisma/client';
+import { Driver } from '@prisma/client';
 import { ColumnDef } from '@tanstack/react-table';
 
-import { Badge } from '~/components/ui/badge';
 import { Checkbox } from '~/components/ui/checkbox';
 import { DataTableColumnHeader } from '~/components/ui/data-table/data-table-column-header';
 

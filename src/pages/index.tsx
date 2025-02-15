@@ -5,7 +5,7 @@ import { ensureLogin, NextPageWithLayout } from '~/libs';
 
 type Props = {};
 
-const Home: NextPageWithLayout<Props> = (props: Props) => {
+const Home: NextPageWithLayout<Props> = ({}: Props) => {
   return <>Home</>;
 };
 

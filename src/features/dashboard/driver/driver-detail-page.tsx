@@ -2,23 +2,19 @@ import React, { useState } from 'react';
 
 import { Driver, Vehicle } from '@prisma/client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { format } from 'date-fns';
-import { capitalize } from 'lodash';
 import { useRouter } from 'next/router';
 
-import { Button } from '~/components/ui/button';
 import { ReactQueryKey } from '~/consts/react-api-keys';
 import { axios } from '~/libs';
 import { ICreateDriver } from '~/schemas';
 
 import DriverForm from './components/driver-form';
 import DriverInformation from './components/driver-information';
-import DriverStatusBadge from './components/driver-status-badge';
 import VehicleInformation from './components/vehicle-information';
 
 type Props = {};
 
-const DriverDetailPage = (props: Props) => {
+const DriverDetailPage = ({}: Props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 

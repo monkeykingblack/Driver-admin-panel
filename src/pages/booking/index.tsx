@@ -13,10 +13,10 @@ const BookingRoute: NextPageWithLayout = () => {
 export const getServerSideProps: GetServerSideProps = ensureLogin(async (context, axios) => {
   const queryClient = new QueryClient();
   await Promise.all([
-    // queryClient.fetchQuery({
-    //   queryKey: ['driver/lists'],
-    //   queryFn: () => axios.get('/driver').then(({ data }) => data.data),
-    // }),
+    queryClient.fetchQuery({
+      queryKey: ['driver/lists'],
+      queryFn: () => axios.get('/driver').then(({ data }) => data.data),
+    }),
   ]);
 
   return {

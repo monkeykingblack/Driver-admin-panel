@@ -1,9 +1,8 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
-import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { debounce, isEmpty } from 'lodash';
 import { PlusIcon } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 import { Button } from '~/components/ui/button';
