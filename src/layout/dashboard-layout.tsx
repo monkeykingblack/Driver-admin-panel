@@ -21,14 +21,14 @@ import { SessionProvider } from '~/context/session';
 export const DashboardLayout: React.FC<{
   children: React.ReactNode;
   user?: User;
-  dehyratedState?: DehydratedState;
-}> = ({ children, user, dehyratedState }) => {
+  dehydratedState?: DehydratedState;
+}> = ({ children, user, dehydratedState }) => {
   return (
-    <AppProvider dehydratedState={dehyratedState}>
+    <AppProvider dehydratedState={dehydratedState}>
       <SessionProvider user={user}>
         <SidebarProvider>
           <AppSidebar />
-          <SidebarInset>
+          <SidebarInset className="overflow-hidden">
             <header className="flex h-16 shrink-0 items-center gap-2">
               <div className="flex items-center gap-2 px-4">
                 <SidebarTrigger className="-ml-1" />

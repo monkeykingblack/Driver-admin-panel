@@ -25,5 +25,88 @@ model User {
   hashedPassword String
   role           Role   @default(OPERATOR)
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  activityLogs ActivityLog[]
+
   @@map("users")
+}
+
+enum DriverStatus {
+  APPROVED
+  BLOCK
+  PENDING
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Driver {
+  id          String       @id @default(cuid())
+  name        String
+  email       String       @unique
+  contactNo   String
+  dateOfBirth DateTime
+  review      Float?
+  gender      Gender
+  status      DriverStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rides   RideBooking[] // Relationship: Driver có thể có nhiều bookings
+  vehicle Vehicle?
+}
+
+model Vehicle {
+  id          String @id @default(cuid())
+  model       String
+  plateNumber String
+  color       String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  driverId String @unique
+  driver   Driver @relation(fields: [driverId], references: [id])
+}
+
+enum RideStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELED
+}
+
+model RideBooking {
+  id              String     @id @default(cuid())
+  customerName    String
+  pickupLocation  String
+  dropoffLocation String
+  rideStatus      RideStatus
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  driverId String
+  Driver   Driver @relation(fields: [driverId], references: [id])
+
+  activityLogs ActivityLog[]
+}
+
+model ActivityLog {
+  id      Int     @id @default(autoincrement())
+  action  String // Ví dụ: "Booking created", "Status changed", "Driver assigned"
+  details String? // Chi tiết hơn về hành động (ví dụ: giá trị cũ, giá trị mới)
+
+  timestamp DateTime @default(now())
+
+  bookingId String
+  booking   RideBooking @relation(fields: [bookingId], references: [id]) // Relationship: Log liên quan đến một Booking
+
+  userId String? // Người thực hiện hành động (có thể là system)
+  user   User?   @relation(fields: [userId], references: [id]) // Relationship: Log được tạo bởi một User (nếu có)
 }

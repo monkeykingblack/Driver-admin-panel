@@ -7,7 +7,7 @@ export function createAxios({ baseURL }: { baseURL: string } = { baseURL: proces
     baseURL,
   });
 
-  axiosInstance.interceptors.response.use(
+  axios.interceptors.response.use(
     (response) => {
       // Any status code that lie within the range of 2xx cause this function to trigger
       return response;

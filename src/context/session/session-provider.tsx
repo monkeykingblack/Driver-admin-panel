@@ -5,6 +5,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { merge } from 'lodash';
 
+import { ReactQueryKey } from '~/consts/react-api-keys';
 import { axios } from '~/libs';
 
 import { ISessionContext, SessionContext } from './session-context';
@@ -15,7 +16,7 @@ interface ISessionProviderProps {
   fallback?: React.ReactNode;
 }
 
-const userMe = async () => axios<{ user: User }>('/api/user/me', { withCredentials: true });
+const userMe = async () => axios<User>('/api/user/me', { withCredentials: true });
 
 export const SessionProvider: React.FC<React.PropsWithChildren<ISessionProviderProps>> = (props) => {
   const { user, fallback, children, disabledApi = false } = props;
@@ -28,8 +29,8 @@ export const SessionProvider: React.FC<React.PropsWithChildren<ISessionProviderP
   });
 
   const { data: userQuery } = useQuery({
-    queryKey: ['user-me'],
-    queryFn: () => userMe().then(({ data }) => data.user),
+    queryKey: ReactQueryKey.userMe(),
+    queryFn: () => userMe().then(({ data }) => data),
     enabled: !disabledApi,
   });
   const { mutateAsync: getUser } = useMutation({ mutationFn: userMe });

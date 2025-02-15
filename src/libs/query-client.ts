@@ -1,6 +1,8 @@
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import { IHttpError } from './errors';
+
 export const errorRequestHandler = (error: unknown) => {
   const { code, message, status } = error as IHttpError;
   // no authentication
