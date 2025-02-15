@@ -100,5 +100,5 @@
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/index.ts"
   },
-  "packageManager": "pnpm@10.2.1"
+  "packageManager": "pnpm@9.15.5"
 }
