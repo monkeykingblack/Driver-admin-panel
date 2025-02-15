@@ -72,7 +72,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             (item) =>
               !item.hidden && (
                 <SidebarMenuItem key={item.text}>
-                  <SidebarMenuButton asChild isActive={item.href === router.pathname}>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={
+                      item.href === '/'
+                        ? router.pathname === item.href
+                        : router.pathname.startsWith(item.href)
+                    }
+                  >
                     <Link href={item.href}>
                       <item.icon />
                       <span>{item.text}</span>
