@@ -1,3 +1,3 @@
-import { auth } from './consts/next-auth';
+import { auth as middleware } from './consts/next-auth';
 
-export default auth;
+export default middleware;
