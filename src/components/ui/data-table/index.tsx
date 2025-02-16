@@ -9,6 +9,7 @@ import {
   getPaginationRowModel,
   OnChangeFn,
   PaginationState,
+  RowSelectionState,
   useReactTable,
 } from '@tanstack/react-table';
 
@@ -27,6 +28,7 @@ interface DataTableProps<TData, TValue> {
   paginationState?: PaginationState & {
     onPageChange: OnChangeFn<PaginationState>;
   };
+  onRowSelected?: (row: TData[]) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -36,8 +38,9 @@ export function DataTable<TData, TValue>({
   totalItems = 0,
   pageSizeOptions,
   paginationState,
+  onRowSelected,
 }: DataTableProps<TData, TValue>) {
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
 
   const tableData = React.useMemo(() => (loading ? Array(10).fill({} as TData) : data), [data, loading]);
 
@@ -64,6 +67,15 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     manualPagination: !!paginationState,
   });
+
+  React.useEffect(() => {
+    const handleSelectionState = (selections: RowSelectionState): TData[] => {
+      return Object.keys(selections).map((key) => table.getSelectedRowModel().rowsById[key]?.original);
+    };
+    if (onRowSelected) {
+      onRowSelected(handleSelectionState(rowSelection));
+    }
+  }, [onRowSelected, rowSelection, table]);
 
   return (
     <div className="space-y-4">

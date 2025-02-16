@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { auth } from '~/consts/next-auth';
+import { NextResponseError } from '~/libs/errors/next-response-error';
 import { prisma } from '~/server/prisma';
 
 export async function GET() {
@@ -22,9 +23,7 @@ export async function GET() {
   });
 
   if (user === null) {
-    return new NextResponse('Unauthorized', {
-      status: 401,
-    });
+    return NextResponseError.unAuthorized();
   }
 
   return NextResponse.json(user);

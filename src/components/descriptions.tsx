@@ -14,8 +14,6 @@ export type DescriptionsProps = {
 const Descriptions = (props: DescriptionsProps) => {
   const { title, description, extra, className } = props;
 
-  console.log(props.children, !!props.children);
-
   return (
     <div className={cn('m-auto p-5', className)}>
       <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
