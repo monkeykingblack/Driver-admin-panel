@@ -93,11 +93,11 @@
   },
   "engines": {
     "node": ">=22.0.0",
-    "pnpm": ">=10.0.0",
+    "pnpm": ">=9.0.0",
     "npm": "please-use-pnpm"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/index.ts"
   },
-  "packageManager": "pnpm@10.2.1"
+  "packageManager": "pnpm@9.15.5"
 }
