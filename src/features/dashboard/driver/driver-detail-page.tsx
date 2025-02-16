@@ -10,6 +10,7 @@ import { ICreateDriver } from '~/schemas';
 
 import DriverForm from './components/driver-form';
 import DriverInformation from './components/driver-information';
+import RideBookingInformation from './components/ride-booking-information';
 import VehicleInformation from './components/vehicle-information';
 
 type Props = {};
@@ -25,7 +26,15 @@ const DriverDetailPage = ({}: Props) => {
   const { data, refetch } = useQuery({
     queryKey: ReactQueryKey.driverDetail(driverId as string),
     queryFn: () =>
-      axios.get<Driver & { vehicle: Vehicle }>('/api/driver/' + driverId).then(({ data }) => data),
+      axios
+        .get<
+          Driver & { vehicle: Vehicle } & {
+            _count: {
+              rides: number;
+            };
+          }
+        >('/api/driver/' + driverId)
+        .then(({ data }) => data),
   });
 
   const { mutateAsync: updateDriver } = useMutation({
@@ -51,6 +60,7 @@ const DriverDetailPage = ({}: Props) => {
 
   return (
     <div className="flex-1 lg:max-w-2xl">
+      <RideBookingInformation driver={data} />
       <DriverInformation driver={data} />
       <VehicleInformation vehicle={data.vehicle} />
     </div>

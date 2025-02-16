@@ -18,7 +18,7 @@ const DriverCreatePage = ({}: Props) => {
   const { mutateAsync: createDriver } = useMutation({
     mutationFn: (data: ICreateDriver) => axios.post('/api/driver', data).then(({ data }) => data),
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: ReactQueryKey.driverList });
+      queryClient.invalidateQueries({ queryKey: ReactQueryKey.driverList() });
       router.push({
         pathname: '/driver',
       });
