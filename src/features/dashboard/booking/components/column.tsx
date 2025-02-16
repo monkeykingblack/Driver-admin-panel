@@ -1,7 +1,7 @@
 'use client';
 
-import { Driver, RideBooking } from '@prisma/client';
-import { ColumnDef } from '@tanstack/react-table';
+import type { Driver, RideBooking } from '@prisma/client';
+import type { ColumnDef } from '@tanstack/react-table';
 
 import { Checkbox } from '~/components/ui/checkbox';
 import { DataTableColumnHeader } from '~/components/ui/data-table/data-table-column-header';
@@ -28,8 +28,6 @@ export const columns: ColumnDef<RideBooking & { driver: Driver }>[] = [
         className="translate-y-[2px]"
       />
     ),
-    enableSorting: false,
-    enableHiding: false,
   },
   {
     accessorKey: 'id',
@@ -54,7 +52,7 @@ export const columns: ColumnDef<RideBooking & { driver: Driver }>[] = [
     },
   },
   {
-    accessorKey: 'driver.name',
+    id: 'driver.name',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Driver name" />,
     cell: ({ row }) => {
       const value = row.original;
@@ -69,7 +67,7 @@ export const columns: ColumnDef<RideBooking & { driver: Driver }>[] = [
     },
   },
   {
-    accessorKey: 'pickdropLocation',
+    id: 'pickdropLocation',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Pick/Drop Address" />,
     cell: ({ row }) => {
       const value = row.original;

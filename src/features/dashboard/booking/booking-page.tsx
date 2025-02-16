@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash';
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -40,6 +40,7 @@ const BookingPage = () => {
   const { data, isFetching } = useQuery({
     queryKey: ReactQueryKey.bookingList(params),
     queryFn: () => axios.get('/api/booking', { params }).then(({ data }) => data),
+    placeholderData: keepPreviousData,
   });
 
   return (
