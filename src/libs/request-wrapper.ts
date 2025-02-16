@@ -16,11 +16,9 @@ type WrapperOptions = {
 
 export function requestWrapper<
   T extends Record<string, string | string[] | undefined> = Record<string, undefined>,
->(
-  handler: (req: NextRequest, ctx: { params: Promise<T> }) => unknown,
-  options: WrapperOptions = { session: true },
-) {
-  return async (req: NextRequest, ctx: { params: Promise<T> }) => {
+  R = { params: Promise<T> },
+>(handler: (req: NextRequest, ctx: R) => Promise<Response>, options: WrapperOptions = { session: true }) {
+  return async (req: NextRequest, ctx: R) => {
     if (options.session) {
       const session = await auth();
       if (!session) {
