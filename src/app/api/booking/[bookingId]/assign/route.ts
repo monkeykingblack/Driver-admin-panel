@@ -6,9 +6,9 @@ import { AssignDriverBookingSchema } from '~/schemas';
 
 import updateRideBooking, { InvalidRideStatusError, RideBookingNotFoundError } from '../_updateBooking';
 
-export const PATCH = requestWrapper(async function PATCH(
+export const PATCH = requestWrapper<{ bookingId: string }>(async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ bookingId: string }> },
+  { params },
 ) {
   const { bookingId: id } = await params;
 
