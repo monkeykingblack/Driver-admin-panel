@@ -63,14 +63,14 @@ const DriverPage = () => {
         <DataTable
           data={data?.result ?? []}
           columns={columns}
+          loading={isFetching}
           totalItems={data?._meta?.total}
-          // loading={isFetching}
-          // paginationState={{
-          //   ...pageParams,
-          //   onPageChange: (updateStateOrValue) => {
-          //     setPageParams(updateStateOrValue);
-          //   },
-          // }}
+          paginationState={{
+            ...pageParams,
+            onPageChange: (updateStateOrValue) => {
+              setPageParams(updateStateOrValue);
+            },
+          }}
         />
       </div>
     </div>
